@@ -3,6 +3,10 @@ package UserRegistrationValidation;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+interface UserValidation {
+	boolean validate(String input);
+}
+
 public class UserRegistration {
 	private static final String REGEX_NAME = "^[A-Z]{1}[a-z]{2,}$";
 	private static final String REGEX_EMAIL = "^[0-9a-zA-Z]+([._+-][0-9a-zA-Z]+)*@[0-9a-zA-Z]+.[a-zA-Z]{2,4}([.][a-zA-Z]{2})*$";
@@ -44,5 +48,10 @@ public class UserRegistration {
 		Matcher matcher = pattern.matcher(input);
 		return matcher.matches();
 	}
+
+	static UserValidation uername = input -> Pattern.matches(REGEX_NAME, input);
+	static UserValidation useremail = input -> Pattern.matches(REGEX_EMAIL, input);
+	static UserValidation userpassword = input -> Pattern.matches(REGEX_PASSWORD, input);
+	static UserValidation userphonenumber = input -> Pattern.matches(REGEX_PHONENUMBER, input);
 
 }
